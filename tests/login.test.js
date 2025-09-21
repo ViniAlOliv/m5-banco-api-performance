@@ -39,4 +39,6 @@ export default function () {
     });
 
     sleep(1)
+
+    return res.json('token')
 }
