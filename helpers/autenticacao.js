@@ -1,19 +1,20 @@
 import http from 'k6/http'
 const postLogin = JSON.parse(open('../fixtures/postLogin.json'))
+import { pegarBaseUrl } from '../utils/variaveis.js';
 
 export function obterToken() {
-    const url = 'http://localhost:3000/login';
-        
-        const payload = JSON.stringify(postLogin)
-    
-        const params = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }
-    
-        //Validar checks
-        const res = http.post(url, payload, params)
+    const url = pegarBaseUrl() + '/login';
 
-        return res.json('token')
+    const payload = JSON.stringify(postLogin)
+
+    const params = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }
+
+    //Validar checks
+    const res = http.post(url, payload, params)
+
+    return res.json('token')
 }

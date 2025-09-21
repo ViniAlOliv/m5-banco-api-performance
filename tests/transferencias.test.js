@@ -1,7 +1,7 @@
 import http from 'k6/http';
 import { sleep } from 'k6';
 import { obterToken } from '../helpers/autenticacao.js';
-
+import { pegarBaseUrl } from '../utils/variaveis.js';
 export const options = {
   iterations: 1
 };
@@ -9,7 +9,7 @@ export const options = {
 export default function () {
   const token = obterToken()
 
-  const url = 'http://localhost:3000/transferencias';
+  const url = pegarBaseUrl() + '/transferencias';
 
   const payload = JSON.stringify({
     contaOrigem: 1,
@@ -30,6 +30,6 @@ export default function () {
   check(res, {
     "status is 201":(res) => res.status.toBe(201)
   });
-  
+
   sleep(1);
 }
